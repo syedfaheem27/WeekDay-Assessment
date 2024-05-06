@@ -14,17 +14,17 @@ const DummyFilters = [
     "AUS",
 ];
 
-/* isSingle is a prop that decides if we're able to make a single selection or multiple selections
-as we have minimum experience and min base salary which are single field selections */
+/*
+ isSingle - decides if we're able to make a single selection or multiple selections
+ */
 
-/* label - serves as a placeholder */
-const Select = ({ isSingle, label, filter, id }) => {
-    const [isOpen, setIsOpen] =
-        useState(false); /* defines whether drop down is open or not */
+/* label - serves as a placeholder title*/
+const Select = ({ isSingle, label, filter, filterKey }) => {
+    /* Drop down open or closed state */
+    const [isOpen, setIsOpen] = useState(false);
 
-    const [selectedFilters, setSelectedFilters] = useState(
-        []
-    ); /* holds all the selected filters which will be shown as chips*/
+    /* All selected filters which will be shown as chips*/
+    const [selectedFilters, setSelectedFilters] = useState([]);
 
     const handleToggleDropDown = () => {
         setIsOpen((op) => !op);
@@ -49,13 +49,16 @@ const Select = ({ isSingle, label, filter, id }) => {
     const handleRemoveFilter = (val) => {
         setSelectedFilters((prev) => prev.filter((op) => op !== val));
     };
+
     const handleResetAllFilters = () => setSelectedFilters([]);
 
     return (
-        <Wrapper onClick={handleToggleDropDown} id={id} onClose={handleCloseDropDown}>
-            {isOpen && (
-                <DropDown filters={filter} onSelect={handleSelectFilters} />
-            )}
+        <Wrapper
+            onClick={handleToggleDropDown}
+            filterKey={filterKey}
+            onClose={handleCloseDropDown}
+        >
+            {isOpen && <DropDown filters={filter} onSelect={handleSelectFilters} />}
             {<Placeholder isOutside={selectedFilters.length !== 0} label={label} />}
             {
                 /* if there are selected filters, we would want to show filter chips */
