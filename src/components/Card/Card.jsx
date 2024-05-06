@@ -1,6 +1,7 @@
 import styles from "./Card.module.css";
 import BoltIcon from "../../assets/bolt.svg";
 import Modal from "../Modal/ModalProvider";
+import About from "../About/About";
 
 //Data structure to be recieved
 /*
@@ -69,7 +70,7 @@ const Card = ({ data }) => {
             </section>
 
             <Modal.Window>
-                <h1>%%DATA that will be passed %%</h1>
+                <About data={data} />
             </Modal.Window>
         </Modal>
     );

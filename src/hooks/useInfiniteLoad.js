@@ -5,7 +5,7 @@ export const useInfiniteLoad = (ref, data, cb) => {
     const options = {
       root: null,
       rootMargin: "0px 0px 0px 0px",
-      threshold: 0.7,
+      threshold: 0.8,
     };
 
     const obsCallback = (entries, observer) => {

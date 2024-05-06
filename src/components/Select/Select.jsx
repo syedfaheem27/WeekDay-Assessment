@@ -7,12 +7,14 @@ import ResetAllIcon from "../../assets/cross.svg";
 
 import styles from "./Select.module.css";
 
+/*
 const DummyFilters = [
     "Indiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "USA",
     "AFG",
     "AUS",
 ];
+*/
 
 /*
  isSingle - decides if we're able to make a single selection or multiple selections

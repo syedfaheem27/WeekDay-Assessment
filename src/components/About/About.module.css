@@ -1,0 +1,47 @@
+.wrapper {
+  width: 100%;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid red;
+  padding: 8px 16px;
+  box-sizing: border-box;
+}
+
+/* 1st row */
+
+.title {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+
+.img-container {
+  width: 40%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.info {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info h3 {
+  color: var(--color-gray-400);
+  font-size: 32px;
+}
+
+.info p {
+  text-transform: capitalize;
+  font-size: 20px;
+}
+.info span {
+  color: var(--color-gray-400);
+  font-weight: bold;
+}
