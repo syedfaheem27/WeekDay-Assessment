@@ -2,8 +2,10 @@ import { useContext, useState } from "react";
 import { ModalContext } from "./ModalContext";
 import styles from './Modal.module.css'
 import { createPortal } from "react-dom";
-/* A compound component */
+import { useOutsideclick } from '../../hooks/useOutsideClick'
 
+
+/* A compound component */
 const Modal = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -51,6 +53,8 @@ const Action = ({ children }) => {
 
 const Window = ({ children }) => {
     const { isOpen, closeModal } = useContext(ModalContext);
+    useOutsideclick(".modal", closeModal);
+
 
     if (!isOpen) return null;
 
