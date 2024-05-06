@@ -3,8 +3,12 @@ import Wrapper from "./Wrapper";
 import DropDown from "./DropDown";
 import Chips from "./Chips";
 import Placeholder from './Placeholder'
+import ResetAllIcon from '../../assets/cross.svg'
+
+import styles from './Select.module.css';
 
 const DummyFilters = ["Indiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "USA", "AFG", "AUS"];
+
 
 /* isSingle is a prop that decides if we're able to make a single selection or multiple selections
 as we have minimum experience and min base salary which are single field selections */
@@ -37,9 +41,10 @@ const Select = ({ isSingle, label = "Label" }) => {
         });
     };
 
-    const handleRemoveFilters = (val) => {
+    const handleRemoveFilter = (val) => {
         setSelectedFilters(prev => prev.filter(op => op !== val));
     }
+    const handleResetAllFilters = () => setSelectedFilters([])
 
     console.log(selectedFilters);
 
@@ -55,7 +60,15 @@ const Select = ({ isSingle, label = "Label" }) => {
                 /* if there are selected filters, we would want to show filter chips */
 
                 selectedFilters.length !== 0 && (
-                    <Chips selectedFilters={selectedFilters} onClick={handleRemoveFilters} />
+                    <>
+                        <Chips selectedFilters={selectedFilters} onClick={handleRemoveFilter} />
+                        <button
+                            className={styles["reset-all"]}
+                            onClick={handleResetAllFilters}
+                        >
+                            <img src={ResetAllIcon} alt="Clear All" />
+                        </button>
+                    </>
                 )
             }
         </Wrapper>
