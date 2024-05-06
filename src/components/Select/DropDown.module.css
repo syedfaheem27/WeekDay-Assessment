@@ -1,0 +1,24 @@
+.drop-down {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  right: 0;
+  border: 1px solid rgba(128, 128, 128, 0.299);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 8px;
+  height: 128px;
+  overflow-y: auto;
+  border-radius: 4px;
+  background-color: #fff;
+  z-index: 200;
+}
+
+.drop-down span {
+  cursor: pointer;
+}
+
+.drop-down span:hover {
+  background-color: rgba(128, 128, 128, 0.059);
+}
