@@ -18,9 +18,10 @@ const DummyFilters = [
 as we have minimum experience and min base salary which are single field selections */
 
 /* label - serves as a placeholder */
-const Select = ({ isSingle, label = "Label" }) => {
+const Select = ({ isSingle, label, filter, id }) => {
     const [isOpen, setIsOpen] =
         useState(false); /* defines whether drop down is open or not */
+
     const [selectedFilters, setSelectedFilters] = useState(
         []
     ); /* holds all the selected filters which will be shown as chips*/
@@ -51,9 +52,9 @@ const Select = ({ isSingle, label = "Label" }) => {
     const handleResetAllFilters = () => setSelectedFilters([]);
 
     return (
-        <Wrapper onClick={handleToggleDropDown}>
+        <Wrapper onClick={handleToggleDropDown} id={id} onClose={handleCloseDropDown}>
             {isOpen && (
-                <DropDown filters={DummyFilters} onSelect={handleSelectFilters} />
+                <DropDown filters={filter} onSelect={handleSelectFilters} />
             )}
             {<Placeholder isOutside={selectedFilters.length !== 0} label={label} />}
             {
