@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Wrapper from "./Wrapper";
 import DropDown from "./DropDown";
+import Chips from "./Chips";
 
-const DummyFilters = ["India", "USA", "AFG", "AUS"];
+const DummyFilters = ["Indiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "USA", "AFG", "AUS"];
 
 /* isSingle is a prop that decides if we're able to make a single selection or multiple selections
 as we have minimum experience and min base salary which are single field selections */
@@ -33,6 +34,10 @@ const Select = ({ isSingle }) => {
         });
     };
 
+    const handleRemoveFilters = (val) => {
+        setSelectedFilters(prev => prev.filter(op => op !== val));
+    }
+
     console.log(selectedFilters);
 
     return (
@@ -44,20 +49,7 @@ const Select = ({ isSingle }) => {
                 /* if there are selected filters, we would want to show filter chips */
 
                 selectedFilters.length !== 0 && (
-                    <div
-                        style={{
-                            position: "absolute",
-                            top: "50%",
-                            transform: "translateY(-50%)",
-                            display: 'flex',
-                            gap: '4px',
-                            alignItems: 'center',
-                        }}
-                    >
-                        {selectedFilters.map((filter, index) => {
-                            return <span key={filter + index}>{filter}</span>;
-                        })}
-                    </div>
+                    <Chips selectedFilters={selectedFilters} onClick={handleRemoveFilters} />
                 )
             }
         </Wrapper>
