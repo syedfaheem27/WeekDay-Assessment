@@ -2,12 +2,15 @@ import { useState } from "react";
 import Wrapper from "./Wrapper";
 import DropDown from "./DropDown";
 import Chips from "./Chips";
+import Placeholder from './Placeholder'
 
 const DummyFilters = ["Indiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "USA", "AFG", "AUS"];
 
 /* isSingle is a prop that decides if we're able to make a single selection or multiple selections
 as we have minimum experience and min base salary which are single field selections */
-const Select = ({ isSingle }) => {
+
+/* label - serves as a placeholder */
+const Select = ({ isSingle, label = "Label" }) => {
     const [isOpen, setIsOpen] =
         useState(false); /* defines whether drop down is open or not */
     const [selectedFilters, setSelectedFilters] = useState(
@@ -45,6 +48,9 @@ const Select = ({ isSingle }) => {
             {isOpen && (
                 <DropDown filters={DummyFilters} onSelect={handleSelectFilters} />
             )}
+            {
+                <Placeholder isOutside={selectedFilters.length !== 0} label={label} />
+            }
             {
                 /* if there are selected filters, we would want to show filter chips */
 
