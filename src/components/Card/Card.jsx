@@ -3,6 +3,7 @@ import BoltIcon from "../../assets/bolt.svg";
 import Modal from "../Modal/ModalProvider";
 
 //Data structure to be recieved
+/*
 const Dummy = {
     jdUid: "cfff35ac-053c-11ef-83d3-06301d0a7178-92010",
     jdLink: "https://weekday.works",
@@ -18,8 +19,8 @@ const Dummy = {
     companyName: "Dropbox",
     logoUrl: "https://logo.clearbit.com/dropbox.com",
 };
-
-const Card = ({ data = Dummy }) => {
+*/
+const Card = ({ data }) => {
     return (
         <Modal>
             <section className={styles.card}>
