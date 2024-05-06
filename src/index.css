@@ -4,7 +4,10 @@
   margin: 0;
   padding: 0;
   --color-primary: #059669;
-  --color-text-fade: #6b7280;
+  --color-gray-500: #6b7280;
+  --color-gray-400: #9ca3af;
+  --color-gray-200: #e5e7eb;
+  --color-bg-paper: #ffff;
 }
 
 img {
