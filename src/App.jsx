@@ -90,6 +90,8 @@ function App() {
               filterKey="minJdSalary"
             />
             <Select filter={Location} label="Location" filterKey="location" />
+
+            <input type="text" placeholder="Search Company name" className={styles.search} />
           </div>
 
           <CardWrapper>
