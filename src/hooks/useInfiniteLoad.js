@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useInfiniteLoad = (ref, data, cb, page, maxPage) => {
+export const useInfiniteLoad = (ref, data, cb) => {
   useEffect(() => {
     const options = {
       root: null,
@@ -12,7 +12,6 @@ export const useInfiniteLoad = (ref, data, cb, page, maxPage) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         if (data.length === 0) return;
-        if (page === maxPage) return;
 
         cb();
 

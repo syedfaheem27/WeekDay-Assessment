@@ -11,5 +11,8 @@ export const emitCorrectKey = (key) => {
 
     case "Location":
       return "location";
+
+    case "Search Company Name":
+      return "companyName";
   }
 };

@@ -14,6 +14,7 @@ import SideBar from "./components/SideBar/SideBar";
 
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar/NavBar";
+import { addFilter } from "./slices/filterSlice";
 
 /*
 Filters that we need to implement
@@ -49,6 +50,14 @@ function App() {
     dispatch(increasePageNum());
   };
 
+  const handleCompanySearch = (key, val) => {
+    let filter = {
+      key,
+      val,
+    };
+    dispatch(addFilter(filter));
+  };
+
   /*
   Keeps watching whether footer intersected with the viewport
   If yes - invoke the callback which increases pageNum
@@ -58,7 +67,7 @@ function App() {
     because the filtered data length is zero, the infinite 
     loading should stop. If not - data will be loaded endlessly
   */
-  useInfiniteLoad(ref, filteredData, handlePageIncrease, page, MAX_PAGE);
+  useInfiniteLoad(ref, filteredData, handlePageIncrease);
 
   /*
   When the page number changes - we load more data
@@ -91,7 +100,14 @@ function App() {
             />
             <Select filter={Location} label="Location" filterKey="location" />
 
-            <input type="text" placeholder="Search Company name" className={styles.search} />
+            <input
+              type="text"
+              placeholder="Search Company Name"
+              className={styles.search}
+              onChange={(e) =>
+                handleCompanySearch(e.target.placeholder, e.target.value)
+              }
+            />
           </div>
 
           <CardWrapper>
@@ -110,9 +126,7 @@ function App() {
               visibility: "hidden",
             }}
           ></footer>
-
         </section>
-
       </section>
     </>
   );

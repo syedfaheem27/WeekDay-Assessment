@@ -25,8 +25,7 @@ export const filterData = (data, filter) => {
   });
 
   //filter based on location
-  if (filter.location.length === 0) return filteredData;
-  else {
+  if (filter.location.length !== 0) {
     filteredData = filteredData
       .map((data) => {
         const locationType =
@@ -44,6 +43,16 @@ export const filterData = (data, filter) => {
         return obj;
       })
       .filter((data) => data !== null);
+  }
+
+  //Filter based on search string
+  if (!filter.companyName) return filteredData;
+  else {
+    filteredData = filteredData.filter((comp) =>
+      comp.companyName
+        .toLowerCase()
+        .startsWith(filter.companyName.toLowerCase())
+    );
   }
 
   return filteredData;

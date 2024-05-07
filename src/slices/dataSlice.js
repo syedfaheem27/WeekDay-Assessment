@@ -41,7 +41,6 @@ export function loadMoreData(pageNum = 1) {
     dispatch(loadingData());
 
     const { jdList, totalCount } = await fetchData(pageNum);
-    console.log(jdList, totalCount);
     dispatch(
       addData({
         data: jdList,

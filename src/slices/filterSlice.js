@@ -7,6 +7,7 @@ const initialState = {
     minExp: 0,
     location: [],
     minJdSalary: 0,
+    companyName: "",
   },
 };
 
@@ -32,6 +33,8 @@ const filterSlice = createSlice({
         case "minJdSalary":
           state.filters.minJdSalary = val;
           break;
+        case "companyName":
+          state.filters.companyName = val;
       }
     },
     removeFilter(state, action) {
