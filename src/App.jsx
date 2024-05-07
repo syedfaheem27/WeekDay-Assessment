@@ -1,9 +1,11 @@
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Select from "./components/Select/Select";
 import { increasePageNum, loadMoreData } from "./slices/dataSlice";
 import Card from "./components/Card/Card";
 import CardWrapper from "./components/Card/CardWrapper";
-import { useEffect, useRef } from "react";
+import Spinner from './components/Spinner/Spinner'
 import { useInfiniteLoad } from "./hooks/useInfiniteLoad";
 import { Experience, Location, MinBaseSalary, Roles } from "./helpers/filters";
 
@@ -68,7 +70,8 @@ function App() {
           <Card key={index} data={job} />
         ))}
         {
-          isLoading && <h1>Loading...</h1>
+          isLoading && <Spinner />
+
         }
       </CardWrapper>
 
@@ -77,8 +80,9 @@ function App() {
         ref={ref}
         style={{
           margin: "32px",
-          border: "1px solid red",
-          height: "120px",
+          // border: "1px solid red",
+          height: "16px",
+          visibility: 'hidden'
         }}
       ></footer>
     </>
