@@ -21,6 +21,10 @@ function App() {
   const { data, isLoading, page, maxCount } = useSelector(
     (store) => store.data
   );
+
+  const { filters } = useSelector(store => store.filters)
+  console.log(filters)
+
   const dispatch = useDispatch();
 
   const ref = useRef(null);

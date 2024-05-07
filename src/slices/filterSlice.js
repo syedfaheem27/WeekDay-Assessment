@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { emitCorrectFilterKey as emitCorrectKey } from "../helpers/emitCorrectFilterKey";
+import { emitCorrectKey } from "../helpers/emitCorrectFilterKey";
 
 const initialState = {
   filters: {

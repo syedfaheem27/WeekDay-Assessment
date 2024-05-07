@@ -6,15 +6,8 @@ import Placeholder from "./Placeholder";
 import ResetAllIcon from "../../assets/cross.svg";
 
 import styles from "./Select.module.css";
-
-/*
-const DummyFilters = [
-    "Indiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "USA",
-    "AFG",
-    "AUS",
-];
-*/
+import { useDispatch } from "react-redux";
+import { addFilter, removeFilter } from "../../slices/filterSlice";
 
 /*
  isSingle - decides if we're able to make a single selection or multiple selections
@@ -22,11 +15,15 @@ const DummyFilters = [
 
 /* label - serves as a placeholder title*/
 const Select = ({ isSingle, label, filter, filterKey }) => {
+
+
     /* Drop down open or closed state */
     const [isOpen, setIsOpen] = useState(false);
 
     /* All selected filters which will be shown as chips*/
     const [selectedFilters, setSelectedFilters] = useState([]);
+
+    const dispatch = useDispatch();
 
     const handleToggleDropDown = () => {
         setIsOpen((op) => !op);
@@ -36,20 +33,32 @@ const Select = ({ isSingle, label, filter, filterKey }) => {
         setIsOpen(false);
     };
 
-    const handleSelectFilters = (val) => {
+    const handleAddFilters = (key, val) => {
+        let filter = {
+            key,
+            val,
+        };
         if (isSingle) {
-            return setSelectedFilters([val]);
+            setSelectedFilters([val]);
+            dispatch(addFilter(filter));
+            return;
         }
 
-        setSelectedFilters((prev) => {
-            if (prev.includes(val)) return prev;
+        if (selectedFilters.includes(val)) return;
 
+        setSelectedFilters(prev => {
             return [...prev, val];
         });
+        dispatch(addFilter(filter));
     };
 
-    const handleRemoveFilter = (val) => {
-        setSelectedFilters((prev) => prev.filter((op) => op !== val));
+    const handleRemoveFilter = (key, val) => {
+        let filter = {
+            key,
+            val,
+        };
+        setSelectedFilters(prev => prev.filter(op => op !== val));
+        dispatch(removeFilter(filter));
     };
 
     const handleResetAllFilters = () => setSelectedFilters([]);
@@ -60,7 +69,7 @@ const Select = ({ isSingle, label, filter, filterKey }) => {
             filterKey={filterKey}
             onClose={handleCloseDropDown}
         >
-            {isOpen && <DropDown filters={filter} onSelect={handleSelectFilters} />}
+            {isOpen && <DropDown filters={filter} onSelect={handleAddFilters.bind(null, label)} />}
             {<Placeholder isOutside={selectedFilters.length !== 0} label={label} />}
             {
                 /* if there are selected filters, we would want to show filter chips */
@@ -69,7 +78,7 @@ const Select = ({ isSingle, label, filter, filterKey }) => {
                     <>
                         <Chips
                             selectedFilters={selectedFilters}
-                            onClick={handleRemoveFilter}
+                            onClick={handleRemoveFilter.bind(null, label)}
                         />
                         <button
                             className={styles["reset-all"]}
