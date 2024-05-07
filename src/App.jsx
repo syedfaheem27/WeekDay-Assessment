@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Select from "./components/Select/Select";
@@ -9,6 +9,7 @@ import Spinner from './components/Spinner/Spinner'
 import { useInfiniteLoad } from "./hooks/useInfiniteLoad";
 import { Experience, Location, MinBaseSalary, Roles } from "./helpers/filters";
 
+import { filterData } from "./helpers/filterData"
 /*
 Filters that we need to implement
 
@@ -24,10 +25,18 @@ function App() {
     (store) => store.data
   );
 
+  const { filters } = useSelector(store => store.filters)
+
 
   const dispatch = useDispatch();
 
   const ref = useRef(null);
+
+  /* The maximum page number */
+  const MAX_PAGE = Math.ceil(maxCount / 10);
+
+  /*Cache the values returned by the function */
+  const filteredData = useMemo(() => filterData(data, filters), [data, filters])
 
   const handlePageIncrease = () => {
     if (Math.ceil(maxCount / 10) === page) return;
@@ -38,7 +47,7 @@ function App() {
   Keeps watching whether footer intersected with the viewport
   If yes - invoke the callback which increases pageNum
   */
-  useInfiniteLoad(ref, data, handlePageIncrease);
+  useInfiniteLoad(ref, filteredData, handlePageIncrease, page, MAX_PAGE);
 
   /*
   When the page number changes - we load more data
@@ -66,7 +75,7 @@ function App() {
 
       <CardWrapper>
 
-        {data.map((job, index) => (
+        {filteredData.map((job, index) => (
           <Card key={index} data={job} />
         ))}
         {
