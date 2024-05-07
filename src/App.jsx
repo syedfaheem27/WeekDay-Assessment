@@ -22,8 +22,6 @@ function App() {
     (store) => store.data
   );
 
-  const { filters } = useSelector(store => store.filters)
-  console.log(filters)
 
   const dispatch = useDispatch();
 

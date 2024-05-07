@@ -7,7 +7,7 @@ import ResetAllIcon from "../../assets/cross.svg";
 
 import styles from "./Select.module.css";
 import { useDispatch } from "react-redux";
-import { addFilter, removeFilter } from "../../slices/filterSlice";
+import { addFilter, removeFilter, resetAllFilters } from "../../slices/filterSlice";
 
 /*
  isSingle - decides if we're able to make a single selection or multiple selections
@@ -61,7 +61,11 @@ const Select = ({ isSingle, label, filter, filterKey }) => {
         dispatch(removeFilter(filter));
     };
 
-    const handleResetAllFilters = () => setSelectedFilters([]);
+    const handleResetAllFilters = () => {
+        setSelectedFilters([])
+        dispatch(resetAllFilters())
+
+    };
 
     return (
         <Wrapper
