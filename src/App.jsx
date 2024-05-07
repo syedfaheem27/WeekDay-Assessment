@@ -1,16 +1,19 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Select from "./components/Select/Select";
 import { increasePageNum, loadMoreData } from "./slices/dataSlice";
 import Card from "./components/Card/Card";
 import CardWrapper from "./components/Card/CardWrapper";
-import Spinner from './components/Spinner/Spinner'
+import Spinner from "./components/Spinner/Spinner";
 import { useInfiniteLoad } from "./hooks/useInfiniteLoad";
 import { Experience, Location, MinBaseSalary, Roles } from "./helpers/filters";
 
-import { filterData } from "./helpers/filterData"
+import { filterData } from "./helpers/filterData";
 import SideBar from "./components/SideBar/SideBar";
+
+import styles from "./App.module.css";
+
 /*
 Filters that we need to implement
 
@@ -20,14 +23,12 @@ Min Base Salary - minJdSalary
 Location - location
 */
 
-
 function App() {
   const { data, isLoading, page, maxCount } = useSelector(
     (store) => store.data
   );
 
-  const { filters } = useSelector(store => store.filters)
-
+  const { filters } = useSelector((store) => store.filters);
 
   const dispatch = useDispatch();
 
@@ -37,7 +38,10 @@ function App() {
   const MAX_PAGE = Math.ceil(maxCount / 10);
 
   /*Cache the values returned by the function */
-  const filteredData = useMemo(() => filterData(data, filters), [data, filters])
+  const filteredData = useMemo(
+    () => filterData(data, filters),
+    [data, filters]
+  );
 
   const handlePageIncrease = () => {
     if (Math.ceil(maxCount / 10) === page) return;
@@ -63,38 +67,33 @@ function App() {
   }, [page]);
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: '200px 1fr 200px'
-    }}>
+    <section className={styles.container}>
       <SideBar />
-      <div style={{
-        border: '1px solid red'
-      }}>
-        <Select filter={Roles} label="Roles" filterKey="jobRole" />
-        <Select
-          filter={Experience}
-          label="Experience"
-          isSingle={true}
-          filterKey="minExp"
-        />
-        <Select
-          filter={MinBaseSalary}
-          label="MinBaseSalary"
-          isSingle={true}
-          filterKey="minJdSalary"
-        />
-        <Select filter={Location} label="Location" filterKey="location" />
+
+      <section className={styles.content}>
+
+        <div className={styles.filters}>
+          <Select filter={Roles} label="Roles" filterKey="jobRole" />
+          <Select
+            filter={Experience}
+            label="Experience"
+            isSingle={true}
+            filterKey="minExp"
+          />
+          <Select
+            filter={MinBaseSalary}
+            label="MinBaseSalary"
+            isSingle={true}
+            filterKey="minJdSalary"
+          />
+          <Select filter={Location} label="Location" filterKey="location" />
+        </div>
 
         <CardWrapper>
-
           {filteredData.map((job, index) => (
             <Card key={index} data={job} />
           ))}
-          {
-            isLoading && <Spinner />
-
-          }
+          {isLoading && <Spinner />}
         </CardWrapper>
         {/*This will hold as a trigger for infinte loading*/}
         <footer
@@ -103,13 +102,11 @@ function App() {
             margin: "32px",
             // border: "1px solid red",
             height: "16px",
-            visibility: 'hidden'
+            visibility: "hidden",
           }}
         ></footer>
-      </div>
-
-
-    </div>
+      </section>
+    </section>
   );
 }
 

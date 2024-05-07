@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: rgba(128, 128, 128, 0.169);
+  border: 1px solid var(--color-gray-200);
   margin: 0 4px;
   display: flex;
   flex-direction: column;
@@ -7,11 +7,27 @@
   width: 80px;
   align-items: center;
   padding: 8px 0;
+  border-radius: 4px;
+  position: relative;
 }
 
+.toggle {
+  position: absolute;
+  width: 32px;
+  border: none;
+  border-radius: 8px;
+  right: -26px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(180deg);
+}
+.open .toggle {
+  transform: rotate(0);
+}
 .open {
-  background-color: orange;
-  width: 90%;
+  width: 160px;
 }
 
 .logo {
@@ -25,7 +41,7 @@
 
 .divider {
   width: 90%;
-  border: 1px solid var(--color-gray-400);
+  border: 1px solid var(--color-gray-200);
   margin: 4px 0;
 }
 

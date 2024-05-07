@@ -12,13 +12,22 @@ import likeIcon from '../../assets/like-icon.svg';
 import docIcon from '../../assets/doc-icon.svg';
 import shareIcon from '../../assets/share-icon.svg';
 
-
+import leftIcon from '../../assets/left-arrow.svg'
 
 
 const SideBar = () => {
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleToggleSidebar = () => {
+        setIsOpen(o => !o);
+    }
     return (
         <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
+            <button className={styles.toggle} onClick={handleToggleSidebar}>
+                <img src={leftIcon} alt="Toggle sidebar icon" />
+            </button>
+
+
             <div className={styles.logo}>
                 <img src={isOpen ? logoOpen : logoClosed} alt="Weekday Logo" />
             </div>
