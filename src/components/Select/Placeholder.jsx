@@ -9,7 +9,7 @@ selections)
 const Placeholder = ({ isOutside, label }) => {
     return (
         <span
-            className={isOutside ? styles['label-outside'] : styles['label-inside']}
+            className={`${styles.label} ${isOutside ? styles.outside : styles.inside}`}
         >
             {label}
         </span>

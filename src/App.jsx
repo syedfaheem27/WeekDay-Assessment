@@ -13,6 +13,7 @@ import { filterData } from "./helpers/filterData";
 import SideBar from "./components/SideBar/SideBar";
 
 import styles from "./App.module.css";
+import NavBar from "./components/NavBar/NavBar";
 
 /*
 Filters that we need to implement
@@ -67,46 +68,51 @@ function App() {
   }, [page]);
 
   return (
-    <section className={styles.container}>
-      <SideBar />
+    <>
+      <section className={styles.container}>
+        <SideBar />
 
-      <section className={styles.content}>
+        <section className={styles.content}>
+          <NavBar />
 
-        <div className={styles.filters}>
-          <Select filter={Roles} label="Roles" filterKey="jobRole" />
-          <Select
-            filter={Experience}
-            label="Experience"
-            isSingle={true}
-            filterKey="minExp"
-          />
-          <Select
-            filter={MinBaseSalary}
-            label="MinBaseSalary"
-            isSingle={true}
-            filterKey="minJdSalary"
-          />
-          <Select filter={Location} label="Location" filterKey="location" />
-        </div>
+          <div className={styles.filters}>
+            <Select filter={Roles} label="Roles" filterKey="jobRole" />
+            <Select
+              filter={Experience}
+              label="Experience"
+              isSingle={true}
+              filterKey="minExp"
+            />
+            <Select
+              filter={MinBaseSalary}
+              label="MinBaseSalary"
+              isSingle={true}
+              filterKey="minJdSalary"
+            />
+            <Select filter={Location} label="Location" filterKey="location" />
+          </div>
 
-        <CardWrapper>
-          {filteredData.map((job, index) => (
-            <Card key={index} data={job} />
-          ))}
-          {isLoading && <Spinner />}
-        </CardWrapper>
-        {/*This will hold as a trigger for infinte loading*/}
-        <footer
-          ref={ref}
-          style={{
-            margin: "32px",
-            // border: "1px solid red",
-            height: "16px",
-            visibility: "hidden",
-          }}
-        ></footer>
+          <CardWrapper>
+            {filteredData.map((job, index) => (
+              <Card key={index} data={job} />
+            ))}
+            {isLoading && <Spinner />}
+          </CardWrapper>
+          {/*This will hold as a trigger for infinte loading*/}
+          <footer
+            ref={ref}
+            style={{
+              margin: "32px",
+              // border: "1px solid red",
+              height: "16px",
+              visibility: "hidden",
+            }}
+          ></footer>
+
+        </section>
+
       </section>
-    </section>
+    </>
   );
 }
 

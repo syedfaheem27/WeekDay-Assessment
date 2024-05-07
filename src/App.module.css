@@ -1,14 +1,14 @@
 .container {
   display: grid;
-  grid-template-columns: 1fr 100% 1fr;
-  gap: 36px;
-  max-width: 1900px;
-  margin: 0 auto;
+  grid-template-columns: 1fr 9fr;
+  gap: 16px;
 }
 
 .content {
   border: 1px solid red;
-  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .content .filters {
