@@ -2,6 +2,7 @@ import styles from "./About.module.css";
 import BoltIcon from "../../assets/bolt.svg";
 
 const About = ({ data }) => {
+    let minExp = data.minExp ?? 0;
     return (
         <section className={styles.wrapper}>
             <div className={styles.title}>
@@ -10,34 +11,33 @@ const About = ({ data }) => {
                 </div>
 
                 <div className={styles.info}>
-                    <h3>{data.companyName}</h3>
+                    <h1>{data.companyName}</h1>
                     <p>
                         Job Role : <span>{data.jobRole}</span>
                     </p>
                     <p>
-                        Location :{" "}<span>{data.location}</span>
+                        Location : <span>{data.location}</span>
+                    </p>
+                    <p>
+                        Estimated Salary:{" "}
+                        <span>
+                            {`${data.minJdSalary ?? 0} - ${data.maxJdSalary ?? 10} LPA ✅ `}
+                        </span>
                     </p>
                 </div>
             </div>
 
-            {/* <div className={styles.salary}>
-                <h2>
-                    Estimated Salary:{" "}
-                    {`${data.minJdSalary ?? 0} - ${data.maxJdSalary ?? 10} LPA ✅ `}
-                </h2>
-            </div>
-
-            <h3>About Company: </h3>
-
             <div className={styles.about}>
-                <h4>About us</h4>
-                <p>{data.jobDetailsFromCompany}</p>
+                <h3>About Company: </h3>
+                <div>
+                    <h4>About us</h4>
+                    <p>{data.jobDetailsFromCompany}</p>
+                </div>
             </div>
-
 
             <div className={styles.exp}>
-                <h4>Minimum Experience</h4>
-                <p>{`${data.minExp ?? 0} years`}</p>
+                <h4>Minimum Experience: </h4>
+                <p>{`${minExp === 0 ? 'none' : minExp + `${minExp === 1 ? ' year' : ' years'}`}`}</p>
             </div>
 
             <div className={styles.apply}>
@@ -47,7 +47,7 @@ const About = ({ data }) => {
                     </span>
                     <span>Easy Apply</span>
                 </button>
-            </div> */}
+            </div>
         </section>
     );
 };

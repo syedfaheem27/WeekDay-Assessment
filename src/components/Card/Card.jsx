@@ -22,6 +22,8 @@ const Dummy = {
 };
 */
 const Card = ({ data }) => {
+    let minExp = data.minExp ?? 0;
+
     return (
         <Modal>
             <section className={styles.card}>
@@ -56,7 +58,7 @@ const Card = ({ data }) => {
 
                 <div className={styles.exp}>
                     <h4>Minimum Experience</h4>
-                    <p>{`${data.minExp ?? 0} years`}</p>
+                    <p>{`${minExp === 0 ? 'none' : minExp + `${minExp === 1 ? ' year' : ' years'}`}`}</p>
                 </div>
 
                 <div className={styles.apply}>

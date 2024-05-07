@@ -14,10 +14,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 }
 
 .overlay > div {
   width: 90%;
+  max-width: 960px;
   background-color: #fff;
   border-radius: 8px;
   padding: 8px 16px;

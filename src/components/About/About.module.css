@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border: 1px solid red;
   padding: 8px 16px;
   box-sizing: border-box;
 }
@@ -13,28 +12,32 @@
 
 .title {
   width: 100%;
-  height: 280px;
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
-  justify-content: space-between;
+  gap: 24px;
 }
 
 .img-container {
+  /* min-width: 96px; */
   width: 40%;
+  max-width: 200px;
   overflow: hidden;
   border-radius: 8px;
 }
 
+.img-container img {
+  border-radius: 8px;
+}
+
 .info {
-  width: 50%;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.info h3 {
+.info h1 {
   color: var(--color-gray-400);
-  font-size: 32px;
+  font-size: 36px;
 }
 
 .info p {
@@ -44,4 +47,95 @@
 .info span {
   color: var(--color-gray-400);
   font-weight: bold;
+}
+
+/* 2nd row */
+.about {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.about h3 {
+  font-size: 24px;
+}
+
+.about h4 {
+  font-size: 18px;
+}
+
+.about > div p {
+  margin-top: 8px;
+  color: var(--color-gray-700);
+}
+
+/*3rd row */
+.exp {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.exp p {
+  color: var(--color-gray-700);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/*4th row */
+
+.apply {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  margin-top: 16px;
+}
+
+.apply button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 100%;
+  background-color: var(--color-primary);
+  padding: 8px;
+  border-radius: 6px;
+  gap: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.apply button span:first-child {
+  width: 48px;
+  overflow: hidden;
+}
+
+.apply button span:last-child {
+  color: var(--color-gray-200);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.apply button:hover {
+  transform: scale(1.1);
+}
+
+/*Fix styles*/
+@media (max-width: 560px) {
+  .wrapper > div {
+    width: 95%;
+    margin: 0 auto;
+  }
+  .title {
+    flex-direction: column;
+    height: auto;
+  }
+  .img-container {
+    width: 70%;
+    max-width: none;
+  }
+  .info {
+    width: 100%;
+  }
 }
