@@ -11,3 +11,5 @@ A minimalist clone of the weekday website which displays the company data which 
 3. It uses redux to efficiently distribute the component wide state
 
 4. A modal that shows all the company details when clicked on a company card. The Nodal has been built using the **Compound Component Pattern** which helps us to create a flexible interface to work with thus avoiding prop explosion.
+
+[Live Link](https://week-day-assessment.vercel.app/)
