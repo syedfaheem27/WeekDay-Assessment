@@ -5,6 +5,8 @@ import Card from "./components/Card/Card";
 import CardWrapper from "./components/Card/CardWrapper";
 import { useEffect, useRef } from "react";
 import { useInfiniteLoad } from "./hooks/useInfiniteLoad";
+import { Experience, Location, MinBaseSalary, Roles } from "./helpers/filters";
+
 /*
 Filters that we need to implement
 
@@ -14,13 +16,6 @@ Min Base Salary - minJdSalary
 Location - location
 */
 
-const DummyRoles = ["Backend", "FrontEnd", "FullStack", "DevOps"];
-
-const DummyMinExp = [1, 2, 3, 4, 5];
-
-const DummyBaseSalary = ["1L", "2L", "3L"];
-
-const DummyLocations = ["Remote", "Hybrid", "In-Office"];
 
 function App() {
   const { data, isLoading, page, maxCount } = useSelector(
@@ -50,20 +45,20 @@ function App() {
 
   return (
     <>
-      <Select filter={DummyRoles} label="Role" filterKey="jobRole" />
+      <Select filter={Roles} label="Roles" filterKey="jobRole" />
       <Select
-        filter={DummyMinExp}
-        label="Minimum Experience"
+        filter={Experience}
+        label="Experience"
         isSingle={true}
         filterKey="minExp"
       />
       <Select
-        filter={DummyBaseSalary}
-        label="Minimum Base Salary"
+        filter={MinBaseSalary}
+        label="MinBaseSalary"
         isSingle={true}
         filterKey="minJdSalary"
       />
-      <Select filter={DummyLocations} label="Location" filterKey="location" />
+      <Select filter={Location} label="Location" filterKey="location" />
 
       <CardWrapper>
 
