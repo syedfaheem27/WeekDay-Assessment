@@ -10,6 +10,7 @@ import { useInfiniteLoad } from "./hooks/useInfiniteLoad";
 import { Experience, Location, MinBaseSalary, Roles } from "./helpers/filters";
 
 import { filterData } from "./helpers/filterData"
+import SideBar from "./components/SideBar/SideBar";
 /*
 Filters that we need to implement
 
@@ -47,6 +48,11 @@ function App() {
   Keeps watching whether footer intersected with the viewport
   If yes - invoke the callback which increases pageNum
   */
+  /*
+    Instead of data- need to pass the filtered data,
+    because the filtered data length is zero, the infinite 
+    loading should stop. If not - data will be loaded endlessly
+  */
   useInfiniteLoad(ref, filteredData, handlePageIncrease, page, MAX_PAGE);
 
   /*
@@ -57,44 +63,53 @@ function App() {
   }, [page]);
 
   return (
-    <>
-      <Select filter={Roles} label="Roles" filterKey="jobRole" />
-      <Select
-        filter={Experience}
-        label="Experience"
-        isSingle={true}
-        filterKey="minExp"
-      />
-      <Select
-        filter={MinBaseSalary}
-        label="MinBaseSalary"
-        isSingle={true}
-        filterKey="minJdSalary"
-      />
-      <Select filter={Location} label="Location" filterKey="location" />
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: '200px 1fr 200px'
+    }}>
+      <SideBar />
+      <div style={{
+        border: '1px solid red'
+      }}>
+        <Select filter={Roles} label="Roles" filterKey="jobRole" />
+        <Select
+          filter={Experience}
+          label="Experience"
+          isSingle={true}
+          filterKey="minExp"
+        />
+        <Select
+          filter={MinBaseSalary}
+          label="MinBaseSalary"
+          isSingle={true}
+          filterKey="minJdSalary"
+        />
+        <Select filter={Location} label="Location" filterKey="location" />
 
-      <CardWrapper>
+        <CardWrapper>
 
-        {filteredData.map((job, index) => (
-          <Card key={index} data={job} />
-        ))}
-        {
-          isLoading && <Spinner />
+          {filteredData.map((job, index) => (
+            <Card key={index} data={job} />
+          ))}
+          {
+            isLoading && <Spinner />
 
-        }
-      </CardWrapper>
+          }
+        </CardWrapper>
+        {/*This will hold as a trigger for infinte loading*/}
+        <footer
+          ref={ref}
+          style={{
+            margin: "32px",
+            // border: "1px solid red",
+            height: "16px",
+            visibility: 'hidden'
+          }}
+        ></footer>
+      </div>
 
-      {/*This will hold as a trigger for infinte loading*/}
-      <footer
-        ref={ref}
-        style={{
-          margin: "32px",
-          // border: "1px solid red",
-          height: "16px",
-          visibility: 'hidden'
-        }}
-      ></footer>
-    </>
+
+    </div>
   );
 }
 
